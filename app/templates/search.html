@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    h1, p{
+        text-align:center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size:40px;
+    }
+    .d-flex{
+        width:40%;
+        margin-left:460px;
+    }
+    .container{
+        text-align:center;
+    }
+</style>
+<h1>Choose Your Team Here!</h1>
+<p>Search Any Pokemon ID</p>
+<form method = "POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.pokemon_name(class='form-control', placeholder='pokemon name') }}
+    {{ form.submit(class='btn btn-primary') }}
+</form>
+
+{% if pokemon %}
+
+    <div class="container">
+        <img src="{{poke.image}}">
+        <h3>Name{{pokemon.name}}</h3>
+        <p>Attack points{{pokemon.attack}}</p>
+        <p>Defense points{{pokemon.defense}}</p>
+        <p>Health points{{pokemon.hp}}</p>
+        <p>Ability{{pokemon.ability}}</p>
+    </div>
+
+{% else %}
+
+{% endif %}
+
+{% endblock %}
