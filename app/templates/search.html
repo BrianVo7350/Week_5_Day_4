@@ -3,11 +3,12 @@
 {% block content %}
 
 <style>
-    h1, p{
+    h1, .ps{
         text-align:center;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size:40px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
     }
+
     .d-flex{
         width:40%;
         margin-left:460px;
@@ -15,9 +16,13 @@
     .container{
         text-align:center;
     }
+
+    .btn{
+        
+    }
 </style>
 <h1>Choose Your Team Here!</h1>
-<p>Search Any Pokemon ID</p>
+<p class="ps">Search Any Pokemon</p>
 <form method = "POST">
     {{ form.hidden_tag() }}
 
@@ -26,7 +31,6 @@
 </form>
 
 {% if pokemon %}
-
     <div class="container">
         <img src="{{poke.image}}">
         <h3>Name{{pokemon.name}}</h3>

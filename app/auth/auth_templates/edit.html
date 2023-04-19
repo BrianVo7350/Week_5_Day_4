@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Login</h1>
-<form class= "POST">
+<h1>Edit Profile</h1>
+<form method="POST">
     {{ form.hidden_tag() }}
-
-    {{form.username(class='form-control', placeholder='username')}}
+    
+    {{form.username(class='form-control', placeholder='Username')}}
+    {{form.email(class='form-control', placeholder='Email')}}
     {{form.password(class='form-control', placeholder='Password')}}
+    {{form.confirm_password(class='form-control', placeholder='Confirm Password')}}
     {{form.submit(id='btn')}}
 </form>
 
@@ -24,5 +26,4 @@
     }
    
 </style>
-
 {% endblock %}

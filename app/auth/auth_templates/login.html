@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Login</h1>
+<form method = "POST">
+    {{ form.hidden_tag() }}
+
+    {{form.username(class='form-control', placeholder='username')}}
+    {{form.password(class='form-control', placeholder='Password')}}
+    {{form.submit(id='btn')}}
+</form>
+
+<style>
+    h1, .form-control{
+        margin-top:10px;
+        text-align:center;
+        width:25%;
+        margin-left:470px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    #btn{
+        margin-top:10px;
+        margin-left:599px;
+    }
+   
+</style>
+
+{% endblock %}
