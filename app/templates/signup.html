@@ -9,6 +9,21 @@
     {{form.email(class='form-control', placeholder='Email')}}
     {{form.password(class='form-control', placeholder='Password')}}
     {{form.confirm_password(class='form-control', placeholder='Confirm Password')}}
-    {{form.submit()}}
+    {{form.submit(id='btn')}}
 </form>
+
+<style>
+    h1, .form-control{
+        margin-top:10px;
+        text-align:center;
+        width:25%;
+        margin-left:470px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    #btn{
+        margin-top:10px;
+        margin-left:599px;
+    }
+   
+</style>
 {% endblock %}

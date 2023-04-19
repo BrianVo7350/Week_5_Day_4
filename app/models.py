@@ -21,5 +21,16 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
 
+#class Pokemon(db.Model):
+    #id = db.Column(db.integer, primary_key=True)
+    #pokename = db.Column(db.String(30), nullable = False)
+    #type = db.Column(db.String(30), nullable = False)
 
-#Pokemon class pokemon name
+    #def __init__(self, pokename, type):
+        #self.pokemname = pokename
+        #self.type = type
+    
+    #def saveToDB(self):
+        #db.session.add(self)
+        #db.session.commit()
+    
