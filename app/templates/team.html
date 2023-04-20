@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container  col-6" id="main">
+    <div class="row justify-content-evenly row-cols-auto">
+    {% if team %}
+{%for pokemon in team %}
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+        <img src= {{pokemon.photo}} class="img-fluid rounded-start" alt="avatar">
+        </div>
+        <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">{{pokemon.pokename}}</h5>
+
+{% endfor %} 
+
+{% endif %}
+
+{% endblock %}

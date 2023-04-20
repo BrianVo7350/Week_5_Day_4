@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="https://pokeapi.co/">Pokemon List</a>
+        <a class="nav-item" href="https://pokeapi.co/">Pokemon List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,21 +14,26 @@
                     .nav-link{
                         margin-top:10px;
                         margin-left:10px;
-                        margin:10px;
-
+                        margin:20px;
+                        font-size:30px;
+                        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                
                     }
                 </style>
 
                 {% if current_user.is_authenticated %}
 
                     <li class="nav-item">
-                        <p class="nav-link active">Hello, {{ current_user.username }}</p>
+                        <p class="nav-link">Hello, {{ current_user.username }}</p>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log Out</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:5000/search">Play</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:5000/team">My Team</a>
                       </li>
                 {% else %}
                     <li class="nav-item">

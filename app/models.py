@@ -10,6 +10,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable = False, unique = True)
     password = db.Column(db.String, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
+    pokemon = db.relationship('Pokemon', secondary = 'team', lazy = 'dynamic')
 
     def __init__(self, username, email, password):
         self.username = username
@@ -20,29 +21,42 @@ class User(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
+team = db.Table('team',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable = False),
+    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'), nullable = False))   
 
-    class Pokemon(db.Model):
-      id = db.Column(db.integer, primary_key=True)
-      pokename = db.Column(db.String(30), nullable = False)
-      type = db.Column(db.String(30), nullable = False)
-      ability = db.Column(db.String(20), nullable = False)
-      attack = db.Column(db.String(20), nullable = False)
-      defense = db.Column(db.String(20), nullable = False)
-      hp = db.Column(db.String(20), nullable = False)
-#     photo = db.Column(db.String(100), nullable = False)
 
-      def __init__(self, id, pokename, type, ability, attack, defense, hp, photo):
-        self.pokemname = pokename
-        self.type = type
-        self.ability = ability
-        self.attack = attack
-        self.defense = defense
-        self.hp = hp
-#         self.photo = photo 
+class Pokemon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pokename = db.Column(db.String(30), nullable = False)
+    #type = db.Column(db.String(30), nullable = False)
+    ability = db.Column(db.String(20), nullable = False)
+    attack = db.Column(db.String(20), nullable = False)
+    defense = db.Column(db.String(20), nullable = False)
+    hp = db.Column(db.String(20), nullable = False)
+    photo = db.Column(db.String(100), nullable = False)
     
     def saveToDB(self):
-        db.session.add(self)
-        db.session.commit()
+         db.session.add(self)
+         db.session.commit()
+
     def deleteFromDB(self):
-        db.session.delete(self)
-        db.session.commit()
+         db.session.delete(self)
+         db.session.commit()
+    
+    def from_dict(self, poke_dict):
+        self.id = poke_dict['id']
+        self.pokename = poke_dict['name']
+        self.ability = poke_dict['ability']
+        self.attack = poke_dict['attack']
+        self.defense = poke_dict['defense']
+        self.hp = poke_dict['hp']
+        self.photo = poke_dict['photo']
+    
+    def known_pokemon(name):
+        return Pokemon.query.filter_by(pokename = name ).first()
+        
+
+
+
+

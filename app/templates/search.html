@@ -16,18 +16,35 @@
     .container{
         text-align:center;
     }
+    .form-control{
+        width:30%;
+        margin-left:460px;
+        text-align:center;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    .card{
+        border-radius:10px;
+        border-width: 5px;;
+        width:40%;
+        margin-bottom:20px;
+        margin-left:400px;
+    }
+
+    .btn{
+        margin-left:20px;
+    }
 </style>
 <h1>Choose Your Team Here!</h1>
 <p class="ps">Search Any Pokemon</p>
 <form method = "POST">
     {{ form.hidden_tag() }}
 
-    {{ form.pokemon_name(class='form-control', placeholder='pokemon name') }}
+    {{ form.pokemon_name(class='form-control', placeholder='Pokemon Name Or ID') }}
     {{ form.submit(class='btn btn-primary') }}
 </form>
 
 {% if pokemon %}
-
+<div class="card">
     <div class="container">
         <img src="{{pokemon.photo}}">
         <h3>Name {{pokemon.name}}</h3>
@@ -36,7 +53,9 @@
         <p>Health points {{pokemon.hp}}</p>
         <p>Ability {{pokemon.ability}}</p>
     </div>
+</div>
 
+<a href="{{url_for('catch_pokemon', id=pokemon.id)}}" class="btn btn-success">Catch?</a>
 {% else %}
 
 {% endif %}
