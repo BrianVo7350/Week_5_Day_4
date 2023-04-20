@@ -24,13 +24,15 @@ def poke_search():
             poke_dict={
                     "poke_id": data['id'],
                     "name": data['name'].title(),
+                    "type": data['type']['name'],
                     "ability":data['abilities'][0]["ability"]["name"],
                     "base experience":data['base_experience'],
                     "photo":data['sprites']['other']['home']["front_default"],
-                    "attack base stat": data['stats'][1]['base_stat'],
-                    "hp base stat":data['stats'][0]['base_stat'],
-                    "defense stat":data['stats'][2]["base_stat"]}
-        return poke_dict
+                    "attack": data['stats'][1]['base_stat'],
+                    "hp":data['stats'][0]['base_stat'],
+                    "defense":data['stats'][2]["base_stat"]}
+            pokemon = poke_dict
+        return render_template('search.html', form = form, pokemon = pokemon)
         #pokemon.saveToDB()
     return render_template('search.html', form = form)
 

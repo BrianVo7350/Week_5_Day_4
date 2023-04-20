@@ -14,7 +14,6 @@ def signup():
             username = form.username.data
             email = form.email.data
             password = form.password.data
-            print('I got the form')
             user = User.query.filter_by(username = username).first()
             if user:
                 flash('That username is taken.', 'danger')
@@ -24,9 +23,7 @@ def signup():
                 flash('That email is already in use. Please use another email.', 'danger')
                 return render_template('signup.html', form = form, emailError=True)
             user = User(username, email, password)
-            print('Creating new user')
             user.saveToDB()
-            print('should be in database')
             flash('Successfully created your account.', 'success')
             return redirect(url_for('auth.login_page'))
         else:

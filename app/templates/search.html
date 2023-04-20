@@ -16,10 +16,6 @@
     .container{
         text-align:center;
     }
-
-    .btn{
-        
-    }
 </style>
 <h1>Choose Your Team Here!</h1>
 <p class="ps">Search Any Pokemon</p>
@@ -31,13 +27,14 @@
 </form>
 
 {% if pokemon %}
+
     <div class="container">
-        <img src="{{poke.image}}">
-        <h3>Name{{pokemon.name}}</h3>
-        <p>Attack points{{pokemon.attack}}</p>
-        <p>Defense points{{pokemon.defense}}</p>
-        <p>Health points{{pokemon.hp}}</p>
-        <p>Ability{{pokemon.ability}}</p>
+        <img src="{{pokemon.photo}}">
+        <h3>Name {{pokemon.name}}</h3>
+        <p>Attack points {{pokemon.attack}}</p>
+        <p>Defense points {{pokemon.defense}}</p>
+        <p>Health points {{pokemon.hp}}</p>
+        <p>Ability {{pokemon.ability}}</p>
     </div>
 
 {% else %}
