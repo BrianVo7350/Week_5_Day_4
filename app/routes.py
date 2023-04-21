@@ -18,7 +18,9 @@ def poke_search():
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}/'
         response = requests.get(url)
         if not response.ok:
-                return "Try again?"
+                return 'Pokemon does not exist'
+                
+                
 
         data = response.json()
         for pokemon in data:
@@ -61,4 +63,7 @@ def team():
      
     return render_template('team.html', team = current_user.pokemon.all())
 
-
+# @app.route('edit')
+# @login_required
+# def edit_profile():
+#     pass
