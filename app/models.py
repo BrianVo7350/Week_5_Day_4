@@ -31,9 +31,9 @@ class Pokemon(db.Model):
     pokename = db.Column(db.String(30), nullable = False)
     #type = db.Column(db.String(30), nullable = False)
     ability = db.Column(db.String(20), nullable = False)
-    attack = db.Column(db.String(20), nullable = False)
-    defense = db.Column(db.String(20), nullable = False)
-    hp = db.Column(db.String(20), nullable = False)
+    attack = db.Column(db.Integer, nullable = False)
+    defense = db.Column(db.Integer, nullable = False)
+    hp = db.Column(db.Integer, nullable = False)
     photo = db.Column(db.String(100), nullable = False)
     
     def saveToDB(self):

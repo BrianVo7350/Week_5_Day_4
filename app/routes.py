@@ -47,24 +47,24 @@ def catch_pokemon(id):
         return redirect(url_for('poke_search'))
     elif current_user.pokemon.count() == 6:
         flash('Team is full please remove a pokemon to add another!', 'warning')
-        return render_template('team.html', pokemon = pokemon)
+        return render_template('team.html', pokemon = pokemon, user = current_user)
     else:
         flash('Added to your team!', 'success')
         current_user.pokemon.append(pokemon)
         db.session.commit()
-        return render_template('team.html', pokemon = pokemon)
+        return render_template('team.html', pokemon = pokemon, user = current_user)
 
          
 @app.route('/team')
 @login_required
 def team():
-    return render_template('team.html', team = current_user.pokemon.all())
+    return render_template('team.html', team = current_user.pokemon.all(), user = current_user)
 
 @app.route('/opteam/<id>')
 @login_required
 def opteam(id):
     user = User.query.filter_by(id = id).first()
-    return render_template('team.html', team = user.pokemon.all())
+    return render_template('team.html', team = user.pokemon.all(), user = user)
 
 @app.route('/showuser')
 @login_required
@@ -72,15 +72,35 @@ def show_users():
     users = User.query.filter(User.id != current_user.id, User.pokemon).all()
     return render_template('allusers.html', users = users)
 
-@app.route('/battle')
+@app.route('/battle/<id>')
 @login_required
-def battle():
-    pokestats = Pokemon.query.filter(Pokemon.attack + Pokemon.defense + Pokemon.hp)
-    if current_user.pokestats > opteam.pokestats:
-        flash(f'Winner is {current_user}')
+def battle(id):
+    user = User.query.filter_by(id = id).first()
+    current_team = current_user.pokemon
+    op_team = user.pokemon
+    current_total = 0
+    op_total = 0
+
+    for pokemon in op_team:
+        op_total += pokemon.attack
+        op_total += pokemon.defense
+        op_total += pokemon.hp
+
+    for pokemon in current_team:
+        current_total += pokemon.attack
+        current_total += pokemon.defense
+        current_total += pokemon.hp
+
+    if op_total > current_total:
+         pass
+    elif op_total < current_total:
+        pass
     else:
-        flash(f'Winner is {opteam}')
-    return render_template('battle.html', battle = pokestats)
+        pass
+
+    
+
+    
 
 #get stats from both pokemon teams
 #compare which is higher
