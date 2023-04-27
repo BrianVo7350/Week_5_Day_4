@@ -15,7 +15,8 @@ class Login(FlaskForm):
     submit = SubmitField()
 
 class Edit(FlaskForm):
-    username = StringField('username', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired()])
+    username = StringField('New username', validators=[DataRequired()])
+    password = StringField('New password', validators=[DataRequired()])
+    email = StringField('New email', validators=[DataRequired()])
     submit = SubmitField()
+

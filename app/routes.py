@@ -19,8 +19,6 @@ def poke_search():
         response = requests.get(url)
         if not response.ok:
                 return 'Pokemon does not exist'
-                
-                
 
         data = response.json()
         for pokemon in data:
@@ -47,7 +45,7 @@ def catch_pokemon(id):
     if pokemon in current_user.pokemon:
         flash('Pokemon already in team!', 'warning')
         return redirect(url_for('poke_search'))
-    elif current_user.pokemon.count() == 5:
+    elif current_user.pokemon.count() == 6:
         flash('Team is full please remove a pokemon to add another!', 'warning')
         return render_template('team.html', pokemon = pokemon)
     else:
@@ -60,10 +58,38 @@ def catch_pokemon(id):
 @app.route('/team')
 @login_required
 def team():
-     
     return render_template('team.html', team = current_user.pokemon.all())
 
-# @app.route('edit')
+@app.route('/opteam/<id>')
+@login_required
+def opteam(id):
+    user = User.query.filter_by(id = id).first()
+    return render_template('team.html', team = user.pokemon.all())
+
+@app.route('/showuser')
+@login_required
+def show_users():
+    users = User.query.filter(User.id != current_user.id, User.pokemon).all()
+    return render_template('allusers.html', users = users)
+
+@app.route('/battle')
+@login_required
+def battle():
+    pokestats = Pokemon.query.filter(Pokemon.attack + Pokemon.defense + Pokemon.hp)
+    if current_user.pokestats > opteam.pokestats:
+        flash(f'Winner is {current_user}')
+    else:
+        flash(f'Winner is {opteam}')
+    return render_template('battle.html', battle = pokestats)
+
+#get stats from both pokemon teams
+#compare which is higher
+#return higher result
+#Current user does not have pokestats
+#stats for both teams
+
+# @app.route('/edit')
 # @login_required
-# def edit_profile():
-#     pass
+# def edit_team():
+#     if current_user.pokemon
+    

@@ -79,8 +79,4 @@ def edit_profile():
                 return redirect(url_for('home_page'))
     return render_template()
 
-    
-#@app.route('/catch', method = 'POST')
-#def catch():
-    #pass
 
