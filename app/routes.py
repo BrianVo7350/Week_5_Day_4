@@ -72,6 +72,10 @@ def show_users():
     users = User.query.filter(User.id != current_user.id, User.pokemon).all()
     return render_template('allusers.html', users = users)
 
+
+wins = 0
+losses = 0
+
 @app.route('/battle/<id>')
 @login_required
 def battle(id):
@@ -92,24 +96,13 @@ def battle(id):
         current_total += pokemon.hp
 
     if op_total > current_total:
-         pass
+        losses += 1
+        flash('Lost Match!')
     elif op_total < current_total:
-        pass
+        wins += 1
+        flash('Won Match!')
     else:
-        pass
+        flash('Both Trainers Down Draw!')
 
-    
+    return render_template('team.html', wins=wins, losses=losses)
 
-    
-
-#get stats from both pokemon teams
-#compare which is higher
-#return higher result
-#Current user does not have pokestats
-#stats for both teams
-
-# @app.route('/edit')
-# @login_required
-# def edit_team():
-#     if current_user.pokemon
-    
