@@ -11,8 +11,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
     pokemon = db.relationship('Pokemon', secondary = 'team', lazy = 'dynamic')
-    wins = db.Column(db.Integer)
-    losses = db.Column(db.Integer)
+    wins = db.Column(db.Integer, default = 0)
+    losses = db.Column(db.Integer, default = 0)
 
     def __init__(self, username, email, password):
         self.username = username
@@ -22,6 +22,16 @@ class User(db.Model, UserMixin):
     def saveToDB(self):
         db.session.add(self)
         db.session.commit()
+
+    def addwin(self):
+        self.wins += 1
+        db.session.commit()
+        
+    def addloss(self):
+        self.losses += 1
+        db.session.commit()
+
+
 
 team = db.Table('team',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable = False),

@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    {% if user != current_user %}
+    {% if user != current_user%}
 <a class="btn" href="{{url_for('battle', id=user.id)}}">Battle {{user.username.title()}}&nbsp;</a>
 {% endif %}
 
     {% if team %}
 {%for pokemon in team %}
-            <p>{{wins}}{{losses}}</p>
+            <p>wins : {{user.wins}} losses : {{user.losses}}</p>
             <div class="card">
                 <p class="card-title">{{pokemon.pokename}}</p>
                 <div class="container">

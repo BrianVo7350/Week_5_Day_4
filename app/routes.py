@@ -73,13 +73,15 @@ def show_users():
     return render_template('allusers.html', users = users)
 
 
-wins = 0
-losses = 0
+
 
 @app.route('/battle/<id>')
 @login_required
 def battle(id):
-    user = User.query.filter_by(id = id).first()
+    wins = 0 
+    losses = 0
+
+    user = User.query.get(id)
     current_team = current_user.pokemon
     op_team = user.pokemon
     current_total = 0
@@ -96,13 +98,15 @@ def battle(id):
         current_total += pokemon.hp
 
     if op_total > current_total:
-        losses += 1
+        user.addwin()
+        current_user.addloss()
         flash('Lost Match!')
     elif op_total < current_total:
-        wins += 1
+        current_user.addwin()
+        user.addloss()
         flash('Won Match!')
     else:
         flash('Both Trainers Down Draw!')
 
-    return render_template('team.html', wins=wins, losses=losses)
+    return render_template('team.html', wins=wins, losses=losses, user=user)
 
